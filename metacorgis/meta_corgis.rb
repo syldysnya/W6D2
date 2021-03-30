@@ -109,8 +109,26 @@ class MetaCorgiSnacks
     @box_id = box_id
   end
 
-  def method_missing(name, *args)
-    # Your code goes here...
+  def method_missing(name, *args) 
+    
+    if [:bone, :kibble, :treat].include?(name)
+      method = name.to_s
+      
+      taste_method = "get_#{method}_tastiness".to_sym
+      info_method = "get_#{method}_info".to_sym
+
+      tastiness = @snack_box.send(taste_method, @box_id)
+      info = @snack_box.send(info_method, @box_id)
+
+      result = "#{method}: #{}"
+      
+
+    end
+
+
+
+    # Object.send(method_name)
+
   end
 
 
